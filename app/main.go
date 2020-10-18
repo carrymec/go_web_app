@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"go_web_app/controller"
+	"go_web_app/middleware"
 	"go_web_app/tool"
 )
 
@@ -18,6 +19,7 @@ func main() {
 	r := gin.Default()
 
 	RegisterRouter(r)
+	r.Use(middleware.Cors())
 	_ = r.Run(config.AppHost + ":" + config.AppPort)
 }
 
