@@ -18,9 +18,10 @@ func main() {
 	r := gin.Default()
 
 	RegisterRouter(r)
-	r.Run(config.AppHost + ":" + config.AppPort)
+	_ = r.Run(config.AppHost + ":" + config.AppPort)
 }
 
+// 路由注册
 func RegisterRouter(r *gin.Engine) {
 	new(controller.Login).Router(r)
 	new(controller.UserController).Router(r)
