@@ -1,0 +1,23 @@
+{
+  "app_name": "go_web",
+  "app_mode": "debug",
+  "app_host": "localhost",
+  "app_port": "8091",
+  "ali_sms": {
+    "sign_name": "线上餐厅",
+    "template_code": "55555",
+    "app_key": "sssssssssssss",
+    "app_secret": "hhhhhhhhh",
+    "region_id": "cn-hangzhou"
+  },
+  "database": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "root",
+    "host": "localhost",
+    "port": "3306",
+    "db_name": "optimize",
+    "charset": "utf8",
+    "show_sql": true
+  }
+}
