@@ -7,12 +7,13 @@ import (
 )
 
 type Config struct {
-	AppName  string         `json:"app_name"`
-	AppMode  string         `json:"app_mode"`
-	AppHost  string         `json:"app_host"`
-	AppPort  string         `json:"app_port"`
-	AliSms   AliSms         `json:"ali_sms"`
-	Database DatabaseConfig `json:"database"`
+	AppName     string         `json:"app_name"`
+	AppMode     string         `json:"app_mode"`
+	AppHost     string         `json:"app_host"`
+	AppPort     string         `json:"app_port"`
+	AliSms      AliSms         `json:"ali_sms"`
+	Database    DatabaseConfig `json:"database"`
+	RedisConfig RedisConfig    `json:"redis_config"`
 }
 
 type AliSms struct {
@@ -34,6 +35,13 @@ type DatabaseConfig struct {
 	ShowSql  bool   `json:"show_sql"`
 }
 
+type RedisConfig struct {
+	Addr     string `json:"addr"`
+	Port     string `json:"port"`
+	Password string `json:"password"`
+	Db       int    `json:"db"`
+}
+
 var _cfg *Config = nil
 
 /**
@@ -53,5 +61,8 @@ func ParseConfig(path string) (*Config, error) {
 		return nil, err
 	}
 	return _cfg, nil
+}
 
+func GetConfig() *Config {
+	return _cfg
 }

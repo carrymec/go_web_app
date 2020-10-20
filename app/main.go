@@ -16,10 +16,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	//初始化redis
+	tool.InitRedis()
 	r := gin.Default()
-
-	RegisterRouter(r)
 	r.Use(middleware.Cors())
+	RegisterRouter(r)
+
 	_ = r.Run(config.AppHost + ":" + config.AppPort)
 }
 
