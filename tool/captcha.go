@@ -16,16 +16,16 @@ type Captcha struct {
 // 生成验证码
 func Generate() *Captcha {
 	parameters := base64Captcha.NewDriverMath(
-		30,
-		60,
-		1,
-		1,
+		50,
+		150,
+		0,
+		10,
 		&color.RGBA{
-			R: 3,
-			G: 102,
-			B: 214,
-			A: 254,
-		}, []string{})
+			R: 0,
+			G: 0,
+			B: 0,
+			A: 0,
+		}, []string{"ApothecaryFont.ttf"})
 	// 生成Id,问题,答案
 	id, question, answer := parameters.GenerateIdQuestionAnswer()
 	captcha, err := parameters.DrawCaptcha(question)

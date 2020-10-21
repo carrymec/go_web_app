@@ -82,6 +82,7 @@ func (user *UserController) verity(c *gin.Context) {
 		return
 	}
 	tool.Failed(c, "验证失败")
+	return
 }
 
 // 用户名和密码登录
@@ -92,11 +93,18 @@ func (user *UserController) loginByNameAndPwd(c *gin.Context) {
 		tool.Failed(c, "参数异常")
 		return
 	}
-	userService := service.UserService{}
-	hasUser := userService.LoginByNameAndPwd(login)
-	if hasUser != nil {
-		tool.Success(c, hasUser)
+	//验证验证码
+	verity := tool.Verity(login.Id, login.Code)
+	if !verity {
+		tool.Failed(c, "验证码验证失败")
 		return
 	}
-	tool.Failed(c, "登陆失败")
+	//登录
+	userService := service.UserService{}
+	hasUser := userService.LoginByNameAndPwd(login.Username, login.Password)
+	if hasUser != nil {
+		tool.Success(c, &hasUser)
+		return
+	}
+	tool.Failed(c, "登陆失败,用户名或者密码错误")
 }

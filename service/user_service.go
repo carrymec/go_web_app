@@ -52,20 +52,33 @@ func (service *UserService) FindByPhone(login param.SmsLogin) *entity.User {
 	newUser.UserName = login.Phone
 	newUser.Mobile = login.Phone
 	newUser.RegisterTime = time.Now().Unix()
-
+	newPwd, _ := tool.AesEncrypt("123456")
+	newUser.Password = newPwd
 	newUser.Id = userDao.InsertUser(newUser)
 	return &newUser
 }
 
-func (service *UserService) LoginByNameAndPwd(login param.Login) *entity.User {
+func (service *UserService) LoginByNameAndPwd(username string, password string) *entity.User {
+	// 已经存在数据库
 	userDao := dao.UserDao{Orm: tool.DbEngine}
-	user := userDao.LoginByNameAndPwd(login)
-	if user != nil {
+	user := userDao.QueryByUsername(username)
+	encrypt, _ := tool.AesEncrypt(password)
+	//用户存在
+	if user.Id != 0 {
+		if !tool.AesDecrypt(user.Password, password) {
+			fmt.Println("密码不正确")
+			return nil
+		}
+		//对比密码
 		user.Password = "***"
-	}
-
-	if user != nil {
 		return user
 	}
-	return nil
+	//新增用户
+	newUser := entity.User{}
+	newUser.UserName = username
+	newUser.RegisterTime = time.Now().Unix()
+	newUser.Password = encrypt
+	newUser.Id = userDao.InsertUser(newUser)
+	newUser.Password = "***"
+	return &newUser
 }

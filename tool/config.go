@@ -14,6 +14,7 @@ type Config struct {
 	AliSms      AliSms         `json:"ali_sms"`
 	Database    DatabaseConfig `json:"database"`
 	RedisConfig RedisConfig    `json:"redis_config"`
+	PasswordKey string         `json:"password_key"`
 }
 
 type AliSms struct {
