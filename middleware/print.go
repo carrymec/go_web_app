@@ -13,6 +13,8 @@ func PrintInfo() gin.HandlerFunc {
 		method := c.Request.Method
 		c.Next()
 		status := c.Writer.Status()
+		idToken := c.Request.Header.Get("Id-token")
+		fmt.Println("idToken is :" + idToken)
 		fmt.Printf("请求地址为 %v,请求method为 %v,请求状态为 %v\n", path, method, status)
 	}
 }

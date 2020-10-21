@@ -20,4 +20,5 @@ require (
 	golang.org/x/sys v0.0.0-20201017003518-b09fb700fbb7 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
+	github.com/golang/mock v1.4.3
 )
