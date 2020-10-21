@@ -15,6 +15,7 @@ func (user *UserController) Router(r *gin.Engine) {
 	r.POST("/api/login_sms", user.loginSms)
 	r.GET("/api/captcha", user.captcha)
 	r.POST("/api/verity", user.verity)
+	r.POST("/api/loginByNameAndPwd", user.loginByNameAndPwd)
 }
 
 // 发送验证码
@@ -81,4 +82,21 @@ func (user *UserController) verity(c *gin.Context) {
 		return
 	}
 	tool.Failed(c, "验证失败")
+}
+
+// 用户名和密码登录
+func (user *UserController) loginByNameAndPwd(c *gin.Context) {
+	var login param.Login
+	err := tool.Decode(c.Request.Body, &login)
+	if err != nil {
+		tool.Failed(c, "参数异常")
+		return
+	}
+	userService := service.UserService{}
+	hasUser := userService.LoginByNameAndPwd(login)
+	if hasUser != nil {
+		tool.Success(c, hasUser)
+		return
+	}
+	tool.Failed(c, "登陆失败")
 }

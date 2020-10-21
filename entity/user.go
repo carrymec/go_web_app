@@ -9,4 +9,5 @@ type User struct {
 	Balance      float64 `xorm:"double" json:"balance"`
 	IsActive     int8    `xorm:"tinyint" json:"is_active"`
 	City         string  `xorm:"varchar(32)" json:"city"`
+	Password     string  `xorm:"varchar(64)" json:"password"`
 }

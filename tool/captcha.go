@@ -48,6 +48,7 @@ func Verity(id string, code string) bool {
 	redis := GlobalRedis.client
 	redisAnswer, err := redis.Get(id).Result()
 	if err != nil {
+		fmt.Printf("redis throw exception %v", err.Error())
 		return false
 	}
 	if redisAnswer != code {

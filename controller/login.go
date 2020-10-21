@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"go_web_app/entity"
+	"go_web_app/param"
 	"net/http"
 )
 
@@ -22,7 +23,7 @@ func (l *Login) hello(c *gin.Context) {
 }
 
 func (l *Login) login(c *gin.Context) {
-	var login entity.Login
+	var login param.Login
 	var result entity.JsonResult
 	if err := c.BindJSON(&login); err != nil {
 		result.Code = -1

@@ -56,3 +56,16 @@ func (service *UserService) FindByPhone(login param.SmsLogin) *entity.User {
 	newUser.Id = userDao.InsertUser(newUser)
 	return &newUser
 }
+
+func (service *UserService) LoginByNameAndPwd(login param.Login) *entity.User {
+	userDao := dao.UserDao{Orm: tool.DbEngine}
+	user := userDao.LoginByNameAndPwd(login)
+	if user != nil {
+		user.Password = "***"
+	}
+
+	if user != nil {
+		return user
+	}
+	return nil
+}

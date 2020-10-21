@@ -3,6 +3,7 @@ package dao
 import (
 	"fmt"
 	"go_web_app/entity"
+	"go_web_app/param"
 	"go_web_app/tool"
 )
 
@@ -30,6 +31,7 @@ func (dao *UserDao) Valid(phone string, code string) *entity.SmsCode {
 	var smsCode entity.SmsCode
 	if _, err := dao.Where("phone=? and code=?", phone, code).Get(&smsCode); err != nil {
 		fmt.Println(err.Error())
+		return nil
 	}
 	return &smsCode
 }
@@ -41,4 +43,13 @@ func (dao *UserDao) InsertUser(user entity.User) int64 {
 		return 0
 	}
 	return rows
+}
+
+func (dao *UserDao) LoginByNameAndPwd(login param.Login) *entity.User {
+	var user entity.User
+	if _, err := dao.Where("user_name=? and password=?", login.Username, login.Password).Get(&user); err != nil {
+		fmt.Println(err.Error())
+		return nil
+	}
+	return &user
 }
