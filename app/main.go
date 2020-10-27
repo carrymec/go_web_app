@@ -1,4 +1,4 @@
-package main
+package internal
 
 import (
 	"github.com/gin-gonic/gin"
@@ -20,6 +20,9 @@ func main() {
 	tool.InitRedis()
 	r := gin.Default()
 	r.Use(middleware.Cors())
+
+	tool.InitSession(r)
+
 	RegisterRouter(r)
 
 	_ = r.Run(config.AppHost + ":" + config.AppPort)

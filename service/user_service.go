@@ -54,5 +54,6 @@ func (service *UserService) FindByPhone(login param.SmsLogin) *entity.User {
 	newUser.RegisterTime = time.Now().Unix()
 
 	newUser.Id = userDao.InsertUser(newUser)
+
 	return &newUser
 }
