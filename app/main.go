@@ -9,5 +9,5 @@ func main() {
 
 	id := primitive.NewObjectID()
 	fmt.Println(id.Hex())
-	fmt.Println("v1")
+	fmt.Println("v1.0.0")
 }
