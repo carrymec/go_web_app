@@ -12,4 +12,5 @@ func main() {
 	fmt.Println("v1.0")
 	fmt.Println("v2")
 	fmt.Println("v3")
+	fmt.Println("rebase v1")
 }
