@@ -15,4 +15,5 @@ func main() {
 	fmt.Println("v3")
 	fmt.Println("v5")
 	fmt.Println("v5")
+	fmt.Println("v5")
 }
